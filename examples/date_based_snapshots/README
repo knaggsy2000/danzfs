@@ -1,0 +1,30 @@
+Here is the way I handle my own date-based snapshots.
+
+
+We have two scripts, one wrote in shell and other in Python: -
+
+1. The shell script just simply takes a snapshot with a defined prefix and format.
+2. The Python script handles cleaning up old snapshots which have exceeded the maximum age in days.
+
+Snapshots will take the format of "PREFIX-yyyyMMdd-HHmm".  The prefix by default is "AS" (automatic snapshot) and is used to determine which scripts the cleanup script needs to look at so it won't remove any snapshots which you or others have created.
+
+
+Step 1
+^^^^^^
+Edit the script "take_snapshots.sh" and change the variables for SNAPSHOTS_TO_TAKE and SNAPSHOT_PREFIX.
+
+Step 2
+^^^^^^
+Edit the script "snapshot_cleanup.py" and change the variables for POOL_SNAPSHOTS and POOL_SNAPSHOTS_PREFIX to match the shell script.  Also adjust MAX_SNAPSHOT_AGE_IN_DAYS as you require.
+
+Step 3
+^^^^^^
+Add "take_snapshots.sh" into Cron and run as often you need snapshots to be generated. 
+
+Step 4
+^^^^^^
+Add "snapshot_cleanup.py" into Cron and run once a day, running it more often won't cause any harm and it calculates which snapshots need to be removed at runtime.
+
+
+
+Easy as that.  You'll need to run both Cron jobs as "root" to ensure the scripts have enough privileges to create and remove snapshots in ZFS.

@@ -1,0 +1,12 @@
+[
+    {
+        "Source": "testpool1",
+        "SourceType": ["ssh", "user@remotezfsbox", "sudo ${cmd}"],
+        "Destinations": [
+            {
+                "Destination": "testpool2",
+                "DestinationType": null
+            }
+        ]
+    }
+]

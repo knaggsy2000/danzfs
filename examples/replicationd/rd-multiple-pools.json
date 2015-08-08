@@ -1,0 +1,48 @@
+[
+    {
+        "Source": "alphapool1",
+        "SourceType": null,
+        "Destinations": [
+            {
+                "Destination": "alphapool2",
+                "DestinationType": null
+            },
+            {
+                "Destination": "alphapool3",
+                "DestinationType": null
+            },
+            {
+                "Destination": "alphapool4",
+                "DestinationType": null
+            }
+        ]
+    },
+    {
+        "Source": "betapool1",
+        "SourceType": null,
+        "Destinations": [
+            {
+                "Destination": "betapool2",
+                "DestinationType": null
+            },
+            {
+                "Destination": "betapool3",
+                "DestinationType": null
+            }
+        ]
+    },
+    {
+        "Source": "gammapool1",
+        "SourceType": null,
+        "Destinations": [
+            {
+                "Destination": "gammapool2",
+                "DestinationType": null
+            },
+            {
+                "Destination": "gammapool3",
+                "DestinationType": null
+            }
+        ]
+    }
+]

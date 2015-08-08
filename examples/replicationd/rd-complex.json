@@ -1,0 +1,56 @@
+[
+    {
+        "Source": "alphapool1",
+        "SourceType": null,
+        "Destinations": [
+            {
+                "Destination": "alphapool2",
+                "DestinationType": ["ssh", "user@remotezfsbox1", "sudo ${cmd}"]
+            },
+            {
+                "Destination": "alphapool3",
+                "DestinationType": null
+            },
+            {
+                "Destination": "alphapool4",
+                "DestinationType": null
+            }
+        ]
+    },
+    {
+        "Source": "betapool1/www",
+        "SourceType": ["ssh", "user@remotezfsbox2", "sudo ${cmd}"],
+        "Destinations": [
+            {
+                "Destination": "betapool2/backups/beta",
+                "DestinationType": null
+            },
+            {
+                "Destination": "betapool3",
+                "DestinationType": null
+            }
+        ]
+    },
+    {
+        "Source": "gammapool1/wwwdata/backup",
+        "SourceType": null,
+        "Destinations": [
+            {
+                "Destination": "gammapool2/backups",
+                "DestinationType": ["ssh", "user@remotezfsbox2", "sudo ${cmd}"]
+            },
+            {
+                "Destination": "gammapool3",
+                "DestinationType": ["ssh", "root@remotezfsbox3", "${cmd}"]
+            },
+            {
+                "Destination": "gammapool4/archive/webserver",
+                "DestinationType": ["ssh", "root@remotezfsbox4", "${cmd}"]
+            },
+            {
+                "Destination": "gammapool5",
+                "DestinationType": null
+            }
+        ]
+    }
+]

@@ -1,0 +1,142 @@
+DanZFS - Release v0.2.1 on XX/05/2013
+=====================================
+Link: http://code.google.com/p/danzfs/
+
+For license and copyright, please see the LICENSE file.
+
+
+Preface
+=======
+DanZFS is a set of Python scripts which allows you check the status of ZFS pools providing a standard frontend.  We call the core ZFS executables, libzfs is NOT used.
+
+We only need a base install of Python to function and of course a working implementation of ZFS.
+
+
+I created this project as I needed a standard way of checking ZFS pools via Python.
+
+Please use the examples (in the "examples" directory) as a guide on using DanZFS.
+
+
+*** WARNING: This code is in a very ALPHA status, it's very likely to contain nasty bugs - use at your own risk! ***
+
+
+Notes
+=====
+v0.2.1 - XXX May 2013
+^^^^^^^^^^^^^^^^^^^^^
+1. Fixed a potential issue with Replicationd where it could generate the same checksum for two different endpoints.  Run replicationd with the mode "rename" and it will give you the old and the new GUIDs so you can rename them.  Please note that changing the destination type argument will result in a new checksum.
+2. Replicationd now has an additional mode called "state" which will tell you the state of the replication.
+
+v0.2.0 - 1st April 2013
+^^^^^^^^^^^^^^^^^^^^^^^
+1. Now uses DanLog (class is inside of DanZFS to avoid version conflicts later on) - my own logger for Python.
+2. Snapshots can now be created, destroyed, and renamed.
+3. New replication script which uses snapshots to move data around - replicationd.  Supports one-to-one and one-to-many style replication, take a look at the example config files as well as it's own README file.
+
+v0.1.2 - 3rd June 2012
+^^^^^^^^^^^^^^^^^^^^^^
+1. Didn't correctly make a new copy of the ZFS command list, instead it referenced it.  This has now been corrected.
+2. New example code showing how I use date-based snapshots and cleanup.
+
+v0.1.1 - 26th May 2012
+^^^^^^^^^^^^^^^^^^^^^^
+1. "Status" field added from "zpool status" - example code updated.
+2. "Action" field added from "zpool status" - example code updated.
+3. "See" field added from "zpool status" - example code updated.
+4. "zpool iostat" - New example code.
+5. "zfs list -t snapshot" - New example code.
+6. "zfs list -t volume" - New example code.
+7. "zfs get all" - New example code.
+8. You can now filter for a specific dataset with the majority of the commands which support this feature, the specific examples will mention this if this is available.
+
+v0.1.0 - 22nd May 2012
+^^^^^^^^^^^^^^^^^^^^^^
+1. Initial version which just provides basic information.
+
+
+Usage
+=====
+On the command line: -
+
+% python snapshot_cleanup.py
+% python zfs_get.py
+% python zfs_list_everything.py
+% python zfs_list_filesystems.py
+% python zfs_list_snapshots.py
+% python zfs_list_volumes.py
+% python zpool_iostat.py
+% python zpool_list.py
+% python zpool_status.py
+% python replicationd.py
+
+
+Current Features
+================
+ 1. zfs get all.
+ 2. zfs list -t filesystem.
+ 3. zfs list -t snapshot.
+ 4. zfs list -t volume.
+ 5. zfs status.
+ 6. zpool iostat.
+ 7. zpool list.
+ 8. zpool status.
+ 9. Date-based snapshots.
+10. zfs set.
+11. Replication using snapshots.
+
+
+Installation
+============
+FreeBSD
+^^^^^^^
+Here are the packages I've currently got installed for DanZFS to work: -
+
+================================================================================================================================
+Name			|	Download From	|	Directory
+================+===================+===========================================================================================
+python27		|	Ports			|	/usr/ports/lang/python/
+================================================================================================================================
+
+You can install them in any order, you might want to make sure the your ports collection is up-to-date.  Python 2.7 is normally installed by default so don't worry about that one.
+
+
+Linux
+^^^^^
+Untested - But no problems are expected.
+
+
+MacOS
+^^^^^
+Untested - But no problems are expected.
+
+
+Solaris
+^^^^^^^
+Untested - But no problems are expected.
+
+
+Microsoft Windows
+^^^^^^^^^^^^^^^^^
+Not available on this platform.
+
+
+FAQ
+===
+Q. What are the dependencies for this program?
+A. Python v2.7 or greater.  That's it, just a base install of Python is needed as DanZFS will call the ZFS executables ("zfs" and "zpool").
+
+Q. What operating systems does it support?
+A. I develop and test DanZFS with FreeBSD 9.1 with ZFS v28.  But it should work on other OS'es which provide ZFS like Solaris and Linux.
+
+Q. Can I create (port) of DanZFS?
+A. By all means! Be sure to read the LICENSE as your port will inherit the license.
+
+Q. I would like a feature that's not in DanZFS...
+A. I'm currently not accepting feature requests.
+
+
+Legal
+=====
+I am in no way affiliated or in partnership with either Google, Sun, Oracle, Microsoft, or anyone else.
+
+<EOF>

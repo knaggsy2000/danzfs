@@ -1,0 +1,30 @@
+Replicationd (RD for short) is a daemon-like Python script which gives near realtime replication of one or more ZFS pools locally and/or remotely via SSH (netcat is planned in the future) using snapshots (named "RD-GUID-X").  Replicationd will first verify the pools exists and will determine whether a full or incremental snapshot it needed.  Replicationd spends more time checking if everything is going to run fine than it does performing the replication!  But this isn't a bad thing.
+
+To use replicationd, first you much create the configuration file.  This will tell the daemon how to replicate the pools, take a look at the example JSON files.
+
+Once you have got your configuration file ready you can then pass it to the replicationd daemon with the startup mode.  The startup mode allowed are: -
+
+1. "runonce" - Performs the replication run only once then exits
+2. "start"   - Performs the replication run then waits 15 seconds before starting again, this will continue until the "stop" command is issued or something very bad happens
+3. "stop"    - Tells replicationd to stop the running configuration file
+
+
+Here are a few example commands: -
+
+% python replicationd.py rd-local-simple.json runonce
+
+% python replicationd.py rd-complex.json start
+% python replicationd.py rd-complex.json stop
+
+% python replicationd.py rd-ssh-source.json start
+% python replicationd.py rd-ssh-source.json stop
+
+You must run replicationd as "root" otherwise it won't be able to make any changes to the ZFS filesystem, which will make this daemon rather useless!
+
+
+When using "stop" you must provide the configuration file as that is used to create a "kill" file in the same directory with the same name with a ".kill" added to the configuration filename.  When replicationd is sleeping (which will be just after a replication run) it will check for this kill file and will exit when it exists.  You could create this file yourself if you feel the need to.
+
+Replicationd isn't a true Unix daemon.  It doesn't handle signals (apart from keyboard interrupt - ^C), has a PID file, or even runs in the background.  I wanted something which would work across any operating system which ZFS has been ported to.
+
+
+Although I have tested this as must as I can (I use it myself to replicate my data across multiple boxes), there could be some serious bugs in this which could cause data corruption or other nasties - you run this at your own risk, (re-)read the LICENSE file for more information.  I advise you test and get used to how this daemon works in a testing environment first (even a VM).

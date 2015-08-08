@@ -1,0 +1,20 @@
+[
+    {
+        "Source": "testpool1",
+        "SourceType": null,
+        "Destinations": [
+            {
+                "Destination": "testpool2",
+                "DestinationType": null
+            },
+            {
+                "Destination": "testpool3",
+                "DestinationType": null
+            },
+            {
+                "Destination": "testpool4",
+                "DestinationType": null
+            }
+        ]
+    }
+]
